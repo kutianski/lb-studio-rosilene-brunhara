@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="error-page"><p className="eyebrow">LB studio · 404</p><h1>Este conteúdo não está disponível.</h1><p>A peça ou a aula pode ter sido retirada do catálogo, ou o endereço mudou.</p><a className="btn" href="/catalogo">Explorar catálogo</a></main>}

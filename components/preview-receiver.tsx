@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {PublicPage,DetailPage} from './site';
+export default function PreviewReceiver(){const [payload,setPayload]=useState<any>(null);useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===window.location.origin&&e.source===window.parent&&e.data?.type==='lb-preview')setPayload(e.data)};window.addEventListener('message',receive);window.parent.postMessage({type:'lb-preview-ready'},window.location.origin);const prevent=(e:MouseEvent)=>{if((e.target as Element).closest('a'))e.preventDefault()};document.addEventListener('click',prevent);return()=>{window.removeEventListener('message',receive);document.removeEventListener('click',prevent)}},[]);if(!payload)return <p style={{padding:20}}>Carregando prévia…</p>;return payload.entry?<DetailPage entry={payload.entry} data={payload.data} preview/>:<PublicPage data={payload.data} page={payload.page} preview/>}
